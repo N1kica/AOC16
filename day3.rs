@@ -18,6 +18,16 @@ fn main() {
         })
         .collect();
 
+    let result = contents
+        .iter()
+        .fold(0, |acc: i32, x| {
+            if is_right( x[0].parse::<i32>().unwrap(), x[1].parse::<i32>().unwrap(), x[2].parse::<i32>().unwrap()) {
+                acc + 1
+            } else {
+                acc
+            }
+    });
+
     let mut acc = 0;
 
     for x in (0..contents.len()).step_by(3) {
@@ -27,6 +37,7 @@ fn main() {
             }
         }
     }
-
+    
+    println!("{:?}", result);
     println!("{:?}", acc);
 }
