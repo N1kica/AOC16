@@ -7,8 +7,8 @@ fn main() {
 
     for i in 0..contents[0].len() {
         let mut char_count: HashMap<char, usize> = HashMap::new();
-        for j in 0..contents.len() {
-            *char_count.entry(contents[j][i]).or_insert(0) += 1;
+        for char_in_column in contents.iter().map(|row| row[i]) {
+            *char_count.entry(char_in_column).or_insert(0) += 1;
         }
 
         let mut char_vec: Vec<_> = char_count.into_iter().collect();
