@@ -9,7 +9,7 @@ fn main() {
         .iter()
         .map(|row| row[i])
         .sorted()
-        .group_by(|&x| x)
+        .group_by(|&x| x)    
     );
 
     let message = groups.fold(String::new(), |acc, group| {
