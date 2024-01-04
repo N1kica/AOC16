@@ -17,7 +17,8 @@ fn main() {
             .into_iter()
             .map(|(key, group)| (key, group.count()))
             .max_by_key(|&(_, count)| count)
-            .map(|(ch, _)| ch).unwrap();
+            .map(|(ch, _)| ch)
+            .unwrap();
 
         format!("{}{}", acc, max)
     });
