@@ -12,16 +12,44 @@ fn main() {
         .group_by(|&x| x)
     );
 
-    let message = groups.fold(String::new(), |acc, group| {
-        let max = group
+    let message = groups.fold(Message::new(), |acc, group| {
+        let count: Vec<_> = group
             .into_iter()
             .map(|(key, group)| (key, group.count()))
+            .collect();
+
+        let max = count
+            .iter()
             .max_by_key(|&(_, count)| count)
             .map(|(ch, _)| ch)
             .unwrap();
+        
+        let min = count
+            .iter()
+            .min_by_key(|&(_, count)| count)
+            .map(|(ch, _)| ch)
+            .unwrap();
 
-        format!("{}{}", acc, max)
+        Message {
+            max: format!("{}{}", acc.max, max),
+            min: format!("{}{}", acc.min, min),
+        }
     });
 
-    println!("{}", message);
+    println!("Part 1: {}", message.max);
+    println!("Part 2: {}", message.min);
+}
+
+struct Message {
+    max: String,
+    min: String,
+}
+
+impl Message {
+    fn new() -> Self {
+        Message {
+            max: String::new(),
+            min: String::new(),
+        }
+    }
 }
