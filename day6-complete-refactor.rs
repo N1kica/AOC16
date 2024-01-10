@@ -1,12 +1,14 @@
-use std::{fs, collections::BTreeMap};
+use std::fs;
+use itertools::Itertools;
 
 fn main() {
-    let contents = aoc::chars_per_line("./data/day6.txt", |c| Some(c));
+    let file = fs::read_to_string("input.txt").expect("Something went wrong reading the file"); 
+    let contents: Vec<Vec<char>> = file.lines().map(|line| line.chars().collect()).collect();
 
     let message = (0..contents[0].len()).map(|i| contents
-        .iter()
+        .iter()        
         .map(|row| row[i])
-        .count_by_group()
+        .counts_by(|c| c)
     ).fold(Message::new(), |acc, group| {
         let max = group
             .iter()
@@ -42,24 +44,5 @@ impl Message {
             max: String::new(),
             min: String::new(),
         }
-    }
-}
-
-trait CountByGroup {
-    fn count_by_group(self) -> BTreeMap<char, usize>; // -> std::collections::btree_map::IntoIter<char, usize>
-}
-
-impl<I> CountByGroup for I
-where
-    I: Iterator<Item = char>,
-{
-    fn count_by_group(self) -> BTreeMap<char, usize> {
-        let mut counts = BTreeMap::new();
-
-        for c in self {
-            *counts.entry(c).or_insert(0) += 1;
-        }
-
-        counts
     }
 }
