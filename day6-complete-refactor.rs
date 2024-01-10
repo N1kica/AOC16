@@ -2,8 +2,7 @@ use std::fs;
 use itertools::Itertools;
 
 fn main() {
-    let file = fs::read_to_string("input.txt").expect("Something went wrong reading the file"); 
-    let contents: Vec<Vec<char>> = file.lines().map(|line| line.chars().collect()).collect();
+    let contents = aoc::chars_per_line("./data/day3.txt", |c| Some(c));
 
     let message = (0..contents[0].len()).map(|i| contents
         .iter()        
