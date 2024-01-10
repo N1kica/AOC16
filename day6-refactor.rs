@@ -53,3 +53,22 @@ impl Message {
         }
     }
 }
+
+// trait CountByGroup {
+//     fn count_by_group(self) -> BTreeMap<char, usize>; // -> std::collections::btree_map::IntoIter<char, usize>
+// }
+
+// impl<I> CountByGroup for I
+// where
+//     I: Iterator<Item = char>,
+// {
+//     fn count_by_group(self) -> BTreeMap<char, usize> {
+//         let mut counts = BTreeMap::new();
+// 
+//         for c in self {
+//             *counts.entry(c).or_insert(0) += 1;
+//         }
+// 
+//         counts
+//     }
+// }
