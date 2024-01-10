@@ -2,7 +2,7 @@ use std::fs;
 use itertools::Itertools;
 
 fn main() {
-    let contents = aoc::chars_per_line("./data/day3.txt", |c| Some(c));
+    let contents = aoc::chars_per_line("./data/day6.txt", |c| Some(c));
 
     let message = (0..contents[0].len()).map(|i| contents
         .iter()        
